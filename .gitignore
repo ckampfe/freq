@@ -1,0 +1,4 @@
+/target
+
+# Benchmark corpora: ~500 MB, regenerate with `python3 bench/gen.py`.
+/bench/*.txt
