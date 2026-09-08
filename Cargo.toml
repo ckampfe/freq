@@ -6,17 +6,12 @@ edition = "2024"
 [dependencies]
 bstr = { version = "1", default-features = false, features = ["std"] }
 clap = { version = "4", features = ["derive"] }
-rustc-hash = { version = "2", optional = true }
 
 [target.'cfg(target_family = "unix")'.dependencies]
 nix = { version = "0.31", default-features = false, features = ["signal"] }
 
 [target.'cfg(not(target_env = "msvc"))'.dependencies]
 tikv-jemallocator = "0.7"
-
-[features]
-default = ["fxhash"]
-fxhash = ["dep:rustc-hash"]
 
 [profile.release]
 codegen-units = 1
