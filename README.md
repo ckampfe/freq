@@ -70,26 +70,27 @@ Options:
 
 ## Benchmarks
 
+
 ```
-$ ./bench.sh
+at [ 19:02:21 ] ➜ ./bench.sh
 high: sort | uniq -c: 3 warmup runs
 high: sort | uniq -c: real run
-       15.99 real        15.81 user         0.16 sys
+       16.07 real        15.89 user         0.17 sys
 mid: sort | uniq -c: 3 warmup runs
 mid: sort | uniq -c: real run
-       12.46 real        12.30 user         0.15 sys
+       12.43 real        12.26 user         0.15 sys
 low: sort | uniq -c: 3 warmup runs
 low: sort | uniq -c: real run
-        7.84 real         7.67 user         0.15 sys
+        7.76 real         7.61 user         0.14 sys
 Benchmark 1: freq bench/bench-high.txt
-  Time (mean ± σ):      1.081 s ±  0.023 s    [User: 1.031 s, System: 0.049 s]
-  Range (min … max):    1.068 s …  1.142 s    9 runs
+  Time (mean ± σ):     723.6 ms ±  16.1 ms    [User: 674.7 ms, System: 47.5 ms]
+  Range (min … max):   702.8 ms … 743.7 ms    9 runs
 
 Benchmark 1: freq bench/bench-mid.txt
-  Time (mean ± σ):     374.7 ms ±   7.8 ms    [User: 350.5 ms, System: 23.6 ms]
-  Range (min … max):   370.2 ms … 394.5 ms    9 runs
+  Time (mean ± σ):     233.5 ms ±   4.7 ms    [User: 209.8 ms, System: 23.0 ms]
+  Range (min … max):   229.0 ms … 241.3 ms    9 runs
 
 Benchmark 1: freq bench/bench-low.txt
-  Time (mean ± σ):     335.8 ms ±   3.0 ms    [User: 312.5 ms, System: 22.8 ms]
-  Range (min … max):   331.5 ms … 340.8 ms    9 runs
+  Time (mean ± σ):     199.6 ms ±   0.9 ms    [User: 178.3 ms, System: 20.8 ms]
+  Range (min … max):   198.6 ms … 200.8 ms    9 runs
 ```

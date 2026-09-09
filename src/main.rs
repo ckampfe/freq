@@ -1,3 +1,4 @@
+use bumpalo::Bump;
 #[cfg(not(target_env = "msvc"))]
 use tikv_jemallocator::Jemalloc;
 
@@ -42,16 +43,25 @@ fn main() -> std::io::Result<()> {
 
     let options = Options::parse();
 
-    let input: Box<dyn BufRead> = match options.input_file {
+    let mut input: Box<dyn BufRead> = match options.input_file {
         Some(path) if path.as_os_str() != "-" => Box::new(BufReader::new(File::open(path)?)),
         _ => Box::new(std::io::stdin().lock()),
     };
 
-    let mut frequencies: HashMap<Vec<u8>, usize> = HashMap::default();
+    let lines_arena = Bump::new();
 
-    for line in input.byte_lines() {
-        *frequencies.entry(line?).or_insert(0) += 1;
-    }
+    let mut frequencies: HashMap<&[u8], usize> = HashMap::default();
+
+    input.for_byte_line(|line| {
+        match frequencies.get_mut(line) {
+            Some(count) => *count += 1,
+            None => {
+                let line_ref = lines_arena.alloc_slice_copy(line);
+                frequencies.insert(line_ref, 1);
+            }
+        }
+        Ok(true)
+    })?;
 
     let inner: Box<dyn Write> = match options.output_file {
         Some(path) => Box::new(File::create(path)?),
@@ -76,7 +86,7 @@ fn main() -> std::io::Result<()> {
     for (line, count) in frequencies_sorted {
         out_writer.write_all(count.format_into(&mut num_buffer).as_bytes())?;
         out_writer.write_all(b" ")?;
-        out_writer.write_all(&line)?;
+        out_writer.write_all(line)?;
         out_writer.write_all(b"\n")?;
     }
 
