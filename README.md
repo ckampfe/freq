@@ -1,6 +1,6 @@
 # freq
 
-Count the occurrences of lines in a file, like `sort | uniq -c` but much faster.
+Count the frequency of lines in a file, like `sort | uniq -c` but much faster.
 
 [![Rust](https://github.com/ckampfe/freq/actions/workflows/rust.yml/badge.svg)](https://github.com/ckampfe/freq/actions/workflows/rust.yml)
 
