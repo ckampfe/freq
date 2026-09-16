@@ -85,14 +85,14 @@ low: sort | uniq -c: 3 warmup runs
 low: sort | uniq -c: real run
         7.76 real         7.61 user         0.14 sys
 Benchmark 1: freq bench/bench-high.txt
-  Time (mean ± σ):     723.6 ms ±  16.1 ms    [User: 674.7 ms, System: 47.5 ms]
-  Range (min … max):   702.8 ms … 743.7 ms    9 runs
+  Time (mean ± σ):     469.2 ms ±  10.3 ms    [User: 433.9 ms, System: 34.5 ms]
+  Range (min … max):   458.5 ms … 493.5 ms    9 runs
 
 Benchmark 1: freq bench/bench-mid.txt
-  Time (mean ± σ):     233.5 ms ±   4.7 ms    [User: 209.8 ms, System: 23.0 ms]
-  Range (min … max):   229.0 ms … 241.3 ms    9 runs
+  Time (mean ± σ):     131.2 ms ±   0.4 ms    [User: 117.3 ms, System: 13.4 ms]
+  Range (min … max):   130.8 ms … 131.8 ms    9 runs
 
 Benchmark 1: freq bench/bench-low.txt
-  Time (mean ± σ):     199.6 ms ±   0.9 ms    [User: 178.3 ms, System: 20.8 ms]
-  Range (min … max):   198.6 ms … 200.8 ms    9 runs
+  Time (mean ± σ):     117.4 ms ±   0.4 ms    [User: 104.5 ms, System: 12.3 ms]
+  Range (min … max):   116.6 ms … 117.8 ms    9 runs
 ```

@@ -9,6 +9,9 @@ static GLOBAL: Jemalloc = Jemalloc;
 use bstr::io::BufReadExt;
 use clap::{Parser, ValueEnum};
 use core::fmt::NumBuffer;
+#[cfg(feature = "foldhash")]
+use foldhash::HashMap;
+#[cfg(not(feature = "foldhash"))]
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter, Write};
@@ -44,7 +47,9 @@ fn main() -> std::io::Result<()> {
     let options = Options::parse();
 
     let mut input: Box<dyn BufRead> = match options.input_file {
-        Some(path) if path.as_os_str() != "-" => Box::new(BufReader::new(File::open(path)?)),
+        Some(path) if path.as_os_str() != "-" => {
+            Box::new(BufReader::with_capacity(2usize.pow(20), File::open(path)?))
+        }
         _ => Box::new(std::io::stdin().lock()),
     };
 
@@ -74,10 +79,10 @@ fn main() -> std::io::Result<()> {
 
     match options.order {
         Order::Asc => {
-            frequencies_sorted.sort_by_key(|el| el.1);
+            frequencies_sorted.sort_unstable_by_key(|el| el.1);
         }
         Order::Desc => {
-            frequencies_sorted.sort_by_key(|el| std::cmp::Reverse(el.1));
+            frequencies_sorted.sort_unstable_by_key(|el| std::cmp::Reverse(el.1));
         }
     }
 

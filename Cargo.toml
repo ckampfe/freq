@@ -7,12 +7,17 @@ edition = "2024"
 bstr = { version = "1", default-features = false, features = ["std"] }
 bumpalo = "3"
 clap = { version = "4", features = ["derive"] }
+foldhash = { version = "0.2", optional = true }
 
 [target.'cfg(target_family = "unix")'.dependencies]
 nix = { version = "0.31", default-features = false, features = ["signal"] }
 
 [target.'cfg(not(target_env = "msvc"))'.dependencies]
 tikv-jemallocator = "0.7"
+
+[features]
+default = ["foldhash"]
+foldhash = ["dep:foldhash"]
 
 [profile.release]
 codegen-units = 1
