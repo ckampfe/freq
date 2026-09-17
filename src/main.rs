@@ -1,12 +1,5 @@
-use bumpalo::Bump;
-#[cfg(not(target_env = "msvc"))]
-use tikv_jemallocator::Jemalloc;
-
-#[cfg(not(target_env = "msvc"))]
-#[global_allocator]
-static GLOBAL: Jemalloc = Jemalloc;
-
 use bstr::io::BufReadExt;
+use bumpalo::Bump;
 use clap::{Parser, ValueEnum};
 use core::fmt::NumBuffer;
 #[cfg(feature = "foldhash")]

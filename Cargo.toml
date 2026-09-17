@@ -12,9 +12,6 @@ foldhash = { version = "0.2", optional = true }
 [target.'cfg(target_family = "unix")'.dependencies]
 nix = { version = "0.31", default-features = false, features = ["signal"] }
 
-[target.'cfg(not(target_env = "msvc"))'.dependencies]
-tikv-jemallocator = "0.7"
-
 [features]
 default = ["foldhash"]
 foldhash = ["dep:foldhash"]
